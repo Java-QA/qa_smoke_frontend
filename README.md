@@ -1,46 +1,81 @@
-# Getting Started with Create React App
+# WishList Frontend Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based frontend application for managing wishlists and gifts. The application allows users to create wishlists, add gifts to them, and manage gift reservations.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User authentication (login/register)
+- Create and manage wishlists
+- Add, edit, and delete gifts
+- Reserve gifts
+- Responsive design using Bootstrap
+- Docker support
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node.js 18 or higher
+- npm or yarn
+- Docker (optional)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Create a `.env` file in the root directory and add your backend API URL:
+```
+REACT_APP_API_URL=http://localhost:8080/api
+```
 
-### `npm run build`
+## Development
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To start the development server:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The application will be available at `http://localhost:3000`.
 
-### `npm run eject`
+## Building for Production
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To build the application:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Docker
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To build and run the application using Docker:
 
-## Learn More
+1. Build the image:
+```bash
+docker build -t wishlist-frontend .
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Run the container:
+```bash
+docker run -p 80:80 -e REACT_APP_API_URL=http://your-backend-url/api wishlist-frontend
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application will be available at `http://localhost`.
+
+## Project Structure
+
+- `/src/components` - Reusable React components
+- `/src/pages` - Page components
+- `/src/services` - API services
+- `/src/types` - TypeScript interfaces and types
+- `/src/utils` - Utility functions
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
