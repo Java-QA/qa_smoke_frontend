@@ -15,7 +15,7 @@ const UserWishlists: React.FC = () => {
             if (!userId) return;
             
             try {
-                const response = await userService.getUserWishlists(Number(userId));
+                const response = await userService.getUserWishlists(userId);
                 setWishlists(response);
                 setLoading(false);
             } catch (err) {

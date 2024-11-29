@@ -71,7 +71,7 @@ const WishLists: React.FC = () => {
                                     </Link>
                                     <Button
                                         variant="danger"
-                                        onClick={() => handleDeleteWishList(wishList.id)}
+                                        onClick={() => handleDeleteWishList(wishList.id.toString())}
                                     >
                                         Delete
                                     </Button>

@@ -1,7 +1,18 @@
 import axios from 'axios';
 import { Gift, GiftDto, LoginDto, UserRegistrationDto, WishList, WishListDto, User } from '../types';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+declare global {
+    interface Window {
+        ENV: {
+            API_URL: string;
+        };
+    }
+}
+
+const API_URL = window.ENV?.API_URL;
+if (!API_URL) {
+    console.error('API_URL is not configured');
+}
 
 const api = axios.create({
     baseURL: API_URL,
@@ -25,9 +36,10 @@ export const authService = {
         }
     },
 
-    async register(username: string, password: string): Promise<void> {
+    async register(username: string, email: string, password: string): Promise<void> {
         try {
-            await api.post('/auth/register', { username, password });
+            const response = await api.post('/auth/register', { username, email, password });
+            return response.data;
         } catch (error) {
             throw new Error('Не удалось зарегистрировать пользователя');
         }
@@ -48,7 +60,7 @@ export const userService = {
         }
     },
 
-    async getUserWishlists(userId: number): Promise<WishList[]> {
+    async getUserWishlists(userId: string): Promise<WishList[]> {
         try {
             const response = await api.get(`/users/${userId}/wishlists`);
             return response.data;
