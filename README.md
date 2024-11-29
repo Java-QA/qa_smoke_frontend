@@ -1,48 +1,40 @@
-# WishList Frontend Application
+# Фронтенд приложения WishList
 
-This is a React-based frontend application for managing wishlists and gifts. The application allows users to create wishlists, add gifts to them, and manage gift reservations.
+Веб-приложение на React для управления списками желаний и подарками. Позволяет пользователям создавать списки желаний, добавлять подарки и управлять их резервированием.
 
-## Features
+## Возможности
 
-- User authentication (login/register)
-- Create and manage wishlists
-- Add, edit, and delete gifts
-- Reserve gifts
-- Responsive design using Bootstrap
-- Docker support
+- Аутентификация пользователей (вход/регистрация)
+- Создание и управление списками желаний
+- Добавление, редактирование и удаление подарков
+- Резервирование подарков
+- Адаптивный дизайн на основе Bootstrap
+- Поддержка Docker
 
-## Prerequisites
+## Требования
 
-- Node.js 18 or higher
-- npm or yarn
-- Docker (optional)
+- Node.js 18 или выше
+- npm или yarn
+- Docker (для контейнеризации)
 
-## Installation
+## Установка для разработки
 
-1. Clone the repository
-2. Install dependencies:
+1. Клонируйте репозиторий
+2. Установите зависимости:
 ```bash
 npm install
 ```
 
-3. Create a `.env` file in the root directory and add your backend API URL:
-```
-REACT_APP_API_URL=http://localhost:8080/api
-```
-
-## Development
-
-To start the development server:
-
+3. Запустите сервер разработки:
 ```bash
 npm start
 ```
 
-The application will be available at `http://localhost:3000`.
+Приложение будет доступно по адресу `http://localhost:3000`.
 
-## Building for Production
+## Сборка для production
 
-To build the application:
+Для сборки приложения:
 
 ```bash
 npm run build
@@ -50,32 +42,72 @@ npm run build
 
 ## Docker
 
-To build and run the application using Docker:
+### Использование docker-compose (рекомендуется)
 
-1. Build the image:
+1. Настройте переменные окружения в `docker-compose.yml`:
+```yaml
+environment:
+  - NODE_ENV=production
+  - REACT_APP_API_URL=https://your-api-url/api
+```
+
+2. Запустите контейнер:
+```bash
+docker-compose up -d
+```
+
+### Ручная сборка и запуск
+
+1. Соберите образ:
 ```bash
 docker build -t wishlist-frontend .
 ```
 
-2. Run the container:
+2. Запустите контейнер:
 ```bash
-docker run -p 80:80 -e REACT_APP_API_URL=http://your-backend-url/api wishlist-frontend
+docker run -p 80:80 -e REACT_APP_API_URL=https://your-api-url/api wishlist-frontend
 ```
 
-The application will be available at `http://localhost`.
+Приложение будет доступно по адресу `http://localhost`.
 
-## Project Structure
+## Структура проекта
 
-- `/src/components` - Reusable React components
-- `/src/pages` - Page components
-- `/src/services` - API services
-- `/src/types` - TypeScript interfaces and types
-- `/src/utils` - Utility functions
+- `/src/components` - Переиспользуемые React компоненты
+- `/src/pages` - Компоненты страниц
+- `/src/services` - Сервисы для работы с API
+- `/src/types` - TypeScript интерфейсы и типы
+- `/src/utils` - Вспомогательные функции
 
-## Contributing
+## Конфигурация
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request
+Приложение использует следующие переменные окружения:
+
+- `REACT_APP_API_URL` - URL backend API (например, https://api.example.com/api)
+- `NODE_ENV` - Окружение (development/production)
+
+Конфигурация может быть изменена:
+1. Через переменные окружения в docker-compose.yml
+2. При запуске контейнера через параметры `-e`
+3. Через файл `.env` при локальной разработке
+
+## Особенности реализации
+
+- TypeScript для типобезопасности
+- React Router для маршрутизации
+- Axios для HTTP-запросов
+- JWT для аутентификации
+- Bootstrap для UI компонентов
+- Nginx для раздачи статики в production
+
+## Разработка
+
+1. Форкните репозиторий
+2. Создайте ветку для новой функциональности
+3. Внесите изменения
+4. Создайте Pull Request
+
+## Безопасность
+
+- Не храните чувствительные данные в коде
+- Используйте переменные окружения для конфигурации
+- Следите за обновлениями зависимостей
