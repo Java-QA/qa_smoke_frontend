@@ -111,3 +111,29 @@ docker run -p 80:80 -e REACT_APP_API_URL=https://your-api-url/api wishlist-front
 - Не храните чувствительные данные в коде
 - Используйте переменные окружения для конфигурации
 - Следите за обновлениями зависимостей
+
+## CI/CD
+
+Проект использует GitHub Actions для автоматизации сборки и публикации Docker образов.
+
+### Автоматические действия
+
+- Сборка Docker образа при каждом push в main и pull request
+- Публикация образа в GitHub Container Registry (ghcr.io)
+- Сканирование уязвимостей с помощью Trivy
+- Многоплатформенная сборка (linux/amd64, linux/arm64)
+
+### Теги образов
+
+- Для каждой ветки: `ghcr.io/username/wishlist-front:branch-name`
+- Для каждого PR: `ghcr.io/username/wishlist-front:pr-N`
+- Для тегов (релизов): 
+  - `ghcr.io/username/wishlist-front:v1.2.3`
+  - `ghcr.io/username/wishlist-front:1.2`
+- SHA коммита: `ghcr.io/username/wishlist-front:sha-xxxxx`
+
+### Использование опубликованного образа
+
+```bash
+docker pull ghcr.io/username/wishlist-front:latest
+docker run -p 80:80 -e REACT_APP_API_URL=https://api.example.com/api ghcr.io/username/wishlist-front:latest
