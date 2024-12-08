@@ -8,6 +8,7 @@ export interface Gift {
     name: string;
     description: string;
     link?: string;
+    imageUrl?: string;
     price?: number;
     reserved: boolean;
     wishListId: number;

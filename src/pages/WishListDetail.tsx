@@ -17,7 +17,8 @@ const WishListDetail: React.FC = () => {
         description: '',
         link: '',
         price: 0,
-        reserved: false
+        reserved: false,
+        imageUrl: ''
     });
 
     useEffect(() => {
@@ -47,7 +48,7 @@ const WishListDetail: React.FC = () => {
         try {
             await giftService.createGift(id, newGift);
             setShowAddGift(false);
-            setNewGift({ name: '', description: '', link: '', price: 0, reserved: false });
+            setNewGift({ name: '', description: '', link: '', price: 0, reserved: false, imageUrl: '' });
             await loadWishList();
         } catch (err) {
             setError('Не удалось добавить подарок');
@@ -106,12 +107,29 @@ const WishListDetail: React.FC = () => {
                     <Col key={gift.id}>
                         <Card>
                             <Card.Body>
+                                {gift.imageUrl && (
+                                    <div className="mb-3 text-center">
+                                        <img 
+                                            src={gift.imageUrl} 
+                                            alt={gift.name}
+                                            className="img-fluid rounded"
+                                            style={{ maxHeight: '200px', objectFit: 'contain' }}
+                                        />
+                                    </div>
+                                )}
                                 <Card.Title>{gift.name}</Card.Title>
                                 <Card.Text>{gift.description}</Card.Text>
                                 {gift.link && (
-                                    <Card.Link href={gift.link} target="_blank">
-                                        Ссылка на подарок
-                                    </Card.Link>
+                                    <div className="mb-3">
+                                        <a 
+                                            href={gift.link} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="btn btn-outline-info btn-sm"
+                                        >
+                                            <i className="bi bi-link-45deg"></i> Посмотреть на сайте магазина
+                                        </a>
+                                    </div>
                                 )}
                                 {gift.price && (
                                     <Card.Text>Цена: {gift.price} руб.</Card.Text>
@@ -177,6 +195,19 @@ const WishListDetail: React.FC = () => {
                                 value={newGift.price}
                                 onChange={(e) => setNewGift({ ...newGift, price: Number(e.target.value) })}
                             />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Ссылка на изображение (необязательно)</Form.Label>
+                            <Form.Control
+                                type="url"
+                                value={newGift.imageUrl || ''}
+                                onChange={(e) => setNewGift({ ...newGift, imageUrl: e.target.value })}
+                                placeholder="https://example.com/image.jpg"
+                            />
+                            <Form.Text className="text-muted">
+                                Укажите прямую ссылку на изображение подарка
+                            </Form.Text>
                         </Form.Group>
 
                         <Button variant="primary" type="submit">
