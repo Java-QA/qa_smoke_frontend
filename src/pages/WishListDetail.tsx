@@ -15,7 +15,7 @@ const WishListDetail: React.FC = () => {
     const [newGift, setNewGift] = useState<NewGift>({
         name: '',
         description: '',
-        link: '',
+        storeUrl: '',
         price: 0,
         reserved: false,
         imageUrl: ''
@@ -48,7 +48,7 @@ const WishListDetail: React.FC = () => {
         try {
             await giftService.createGift(id, newGift);
             setShowAddGift(false);
-            setNewGift({ name: '', description: '', link: '', price: 0, reserved: false, imageUrl: '' });
+            setNewGift({ name: '', description: '', storeUrl: '', price: 0, reserved: false, imageUrl: '' });
             await loadWishList();
         } catch (err) {
             setError('Не удалось добавить подарок');
@@ -119,10 +119,10 @@ const WishListDetail: React.FC = () => {
                                 )}
                                 <Card.Title>{gift.name}</Card.Title>
                                 <Card.Text>{gift.description}</Card.Text>
-                                {gift.link && (
+                                {gift.storeUrl && (
                                     <div className="mb-3">
                                         <a 
-                                            href={gift.link} 
+                                            href={gift.storeUrl} 
                                             target="_blank" 
                                             rel="noopener noreferrer" 
                                             className="btn btn-outline-info btn-sm"
@@ -180,12 +180,16 @@ const WishListDetail: React.FC = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Ссылка (необязательно)</Form.Label>
+                            <Form.Label>Ссылка на магазин (необязательно)</Form.Label>
                             <Form.Control
                                 type="url"
-                                value={newGift.link}
-                                onChange={(e) => setNewGift({ ...newGift, link: e.target.value })}
+                                value={newGift.storeUrl || ''}
+                                onChange={(e) => setNewGift({ ...newGift, storeUrl: e.target.value })}
+                                placeholder="https://example.com/product"
                             />
+                            <Form.Text className="text-muted">
+                                Укажите ссылку на страницу товара в магазине
+                            </Form.Text>
                         </Form.Group>
 
                         <Form.Group className="mb-3">

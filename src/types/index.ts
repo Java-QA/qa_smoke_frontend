@@ -7,7 +7,7 @@ export interface Gift {
     id: number;
     name: string;
     description: string;
-    link?: string;
+    storeUrl?: string;
     imageUrl?: string;
     price?: number;
     reserved: boolean;
@@ -41,6 +41,7 @@ export interface WishListDto {
 export interface GiftDto {
     name: string;
     description?: string;
+    storeUrl?: string;
     imageUrl?: string;
     price?: number;
 }

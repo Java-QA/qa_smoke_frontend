@@ -10,7 +10,7 @@ services:
       - "8081:80"
     environment:
       - NODE_ENV=production
-      - REACT_APP_API_URL=https://api.wishlist.otus.kartushin.su/api
+      - REACT_APP_API_URL=http://127.0.0.1:8080/api
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
       interval: 30s
