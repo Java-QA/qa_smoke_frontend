@@ -116,13 +116,19 @@ const WishListDetail: React.FC = () => {
                                 {gift.price && (
                                     <Card.Text>Цена: {gift.price} руб.</Card.Text>
                                 )}
-                                <Button
-                                    variant={gift.reserved ? "secondary" : "primary"}
-                                    onClick={() => handleReserveGift(gift.id.toString())}
-                                    disabled={gift.reserved}
-                                >
-                                    {gift.reserved ? "Зарезервирован" : "Зарезервировать"}
-                                </Button>
+                                <div className="d-flex gap-2">
+                                    <Button
+                                        variant={gift.reserved ? "warning" : "primary"}
+                                        onClick={() => handleReserveGift(gift.id.toString())}
+                                    >
+                                        {gift.reserved ? "Снять резерв" : "Зарезервировать"}
+                                    </Button>
+                                    {gift.reserved && (
+                                        <small className="text-muted d-block mt-2">
+                                            Подарок зарезервирован
+                                        </small>
+                                    )}
+                                </div>
                             </Card.Body>
                         </Card>
                     </Col>
