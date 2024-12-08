@@ -15,7 +15,7 @@ const WishLists: React.FC = () => {
             const data = await wishListService.getCurrentUserWishLists();
             setWishLists(data);
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Failed to load wish lists');
+            setError(err.response?.data?.message || 'Не удалось загрузить списки желаний');
         }
     };
 
@@ -31,7 +31,7 @@ const WishLists: React.FC = () => {
             setNewWishList({ title: '' });
             loadWishLists();
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Failed to create wish list');
+            setError(err.response?.data?.message || 'Не удалось создать список желаний');
         }
     };
 
@@ -40,16 +40,16 @@ const WishLists: React.FC = () => {
             await wishListService.deleteWishList(id);
             loadWishLists();
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Failed to delete wish list');
+            setError(err.response?.data?.message || 'Не удалось удалить список желаний');
         }
     };
 
     return (
         <Container className="mt-5">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h2>My Wish Lists</h2>
+                <h2>Мои списки желаний</h2>
                 <Button variant="primary" onClick={() => setShowModal(true)}>
-                    Create New List
+                    Создать новый список
                 </Button>
             </div>
 
@@ -62,18 +62,18 @@ const WishLists: React.FC = () => {
                                 <Card.Text>{wishList.description}</Card.Text>
                                 <Card.Text>
                                     <small className="text-muted">
-                                        {wishList.gifts.length} gifts
+                                        {wishList.gifts.length} подарков
                                     </small>
                                 </Card.Text>
                                 <div className="d-flex justify-content-between">
                                     <Link to={`/wishlists/${wishList.id}`}>
-                                        <Button variant="primary">View</Button>
+                                        <Button variant="primary">Просмотр</Button>
                                     </Link>
                                     <Button
                                         variant="danger"
                                         onClick={() => handleDeleteWishList(wishList.id.toString())}
                                     >
-                                        Delete
+                                        Удалить
                                     </Button>
                                 </div>
                             </Card.Body>
@@ -84,12 +84,12 @@ const WishLists: React.FC = () => {
 
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create New Wish List</Modal.Title>
+                    <Modal.Title>Создать новый список желаний</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleCreateWishList}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Title</Form.Label>
+                            <Form.Label>Название</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={newWishList.title}
@@ -100,7 +100,7 @@ const WishLists: React.FC = () => {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Description (optional)</Form.Label>
+                            <Form.Label>Описание (необязательно)</Form.Label>
                             <Form.Control
                                 as="textarea"
                                 value={newWishList.description || ''}
@@ -111,10 +111,10 @@ const WishLists: React.FC = () => {
                         </Form.Group>
                         <div className="d-flex justify-content-end">
                             <Button variant="secondary" className="me-2" onClick={() => setShowModal(false)}>
-                                Cancel
+                                Отмена
                             </Button>
                             <Button variant="primary" type="submit">
-                                Create
+                                Создать
                             </Button>
                         </div>
                     </Form>

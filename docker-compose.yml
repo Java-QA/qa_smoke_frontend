@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: wishlist-frontend
     ports:
-      - "80:80"
+      - "8081:80"
     environment:
       - NODE_ENV=production
       - REACT_APP_API_URL=https://api.wishlist.otus.kartushin.su/api
